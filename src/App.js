@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import {HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { AppHeader } from './cmps/AppHeader/AppHeader';
+import './style/App.scss';
+import { ContactDetailsPage } from './views/ContactDetailsPage/ContactDetailsPage';
+import { ContactEditPage } from './views/ContactEditPage/ContactEditPage';
+import { ContactPage } from './views/ContactPage/ContactPage';
+import { HomePage } from './views/HomePage/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+      <AppHeader />
+        <Switch>
+          {/* <HomePage /> */}
+          <Route component={ContactEditPage} path="/edit/:contactId?" />
+          <Route component={ContactDetailsPage} path="/detalis/:contactId" />
+          <Route component={ContactPage} path="/contact" />
+          <Route component={HomePage} path="/" />
+        </Switch>
+      </Router>
     </div>
   );
 }

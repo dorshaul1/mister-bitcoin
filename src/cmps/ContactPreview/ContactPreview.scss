@@ -1,0 +1,48 @@
+.contactPreview {
+    background-color: rgb(235, 235, 235);
+    box-shadow: 4px 4px 4px 0px rgba(169, 169, 169, 0.452);
+    margin: 0 10px 20px 10px;
+    border-radius: 80px;
+    width: 300px;
+    height: 80px;
+    padding: 10px;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: rgb(224, 224, 224);
+
+        box-shadow:none;
+        img{
+            transform: rotate(7deg);
+
+        }
+        
+    }
+    .contact-image {
+        background-color: white;
+        border-radius: 50%;
+        // height: 70%;
+        margin-right: 40px;
+        width: 80px;
+        height: 80px;
+        img {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            // &:hover{
+            // }
+
+        }
+    }
+    .contact-info {
+        h1 {
+            font-size: 1rem;
+            margin: 0;
+        }
+        h3 {
+            font-size: 0.8rem;
+            color: rgb(158, 158, 158);
+            margin: 0;
+        }
+    }
+}
