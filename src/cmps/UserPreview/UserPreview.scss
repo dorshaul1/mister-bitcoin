@@ -1,12 +1,28 @@
 .userPreview {
-    border: 1px solid black;
+    border: 1px solid rgb(73, 73, 73);
     width: 200px;
     padding: 0 0 10px 10px;
-
-    h1{
+    o h1 {
         font-size: 1.2rem;
     }
-    small{
-        font-size: .8rem;
+    small {
+        font-size: 0.8rem;
+        margin: 5px 0;
+    }
+
+    h2 {
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        margin: 10px 0;
+        color: rgb(122, 122, 122);
+    }
+
+    .bitcoin {
+        color: rgb(54, 185, 54);
+        font-size: 1.2rem;
+}
+    .USD{
+        color: rgb(122, 122, 122);
+        font-size: 1.2rem;
     }
 }

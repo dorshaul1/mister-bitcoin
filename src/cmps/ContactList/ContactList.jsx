@@ -6,7 +6,7 @@ import './ContactList.scss'
 export const ContactList = ({ contacts }) => {
 
     return (
-        <div className="contactList flex">
+        <div className="contactList flex column">
             {contacts.map((contact)=><ContactPreview key={contact._id} contact={contact}/>)}
         </div>
     )

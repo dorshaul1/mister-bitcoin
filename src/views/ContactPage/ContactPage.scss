@@ -1,5 +1,29 @@
 .contactPage {
-    h1{
-        margin: 20px;
+    // h1 {
+    //     margin: 20px;
+    //     text-transform: uppercase;
+    //     color: rgba(240, 240, 240, 0.952);
+    // }
+    padding: 0 80px;
+
+    .add-btn {
+        background-color: rgba(128, 128, 128, 0.452);
+        // color: rgb(240, 240, 240);
+        border: none;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        position: fixed;
+        right: 50px;
+        bottom: 50px;
+
+        img {
+            width: 50%;
+        }
+
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.705);
+            cursor: pointer;
+        }
     }
 }

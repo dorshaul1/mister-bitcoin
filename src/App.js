@@ -5,6 +5,8 @@ import { ContactDetailsPage } from './views/ContactDetailsPage/ContactDetailsPag
 import { ContactEditPage } from './views/ContactEditPage/ContactEditPage';
 import { ContactPage } from './views/ContactPage/ContactPage';
 import { HomePage } from './views/HomePage/HomePage';
+import { Login } from './views/Login';
+import { Signup } from './views/Signup';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route component={ContactEditPage} path="/edit/:contactId?" />
           <Route component={ContactDetailsPage} path="/detalis/:contactId" />
           <Route component={ContactPage} path="/contact" />
+          <Route component={Signup} path="/signup" />
+          <Route component={Login} path="/login" />
           <Route component={HomePage} path="/" />
         </Switch>
       </Router>

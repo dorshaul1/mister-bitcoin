@@ -1,14 +1,19 @@
 
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { TransferFund } from '../../cmps/TransferFund/TransferFund'
 import contactService from '../../services/contactService'
+import { removeContact } from '../../store/actions/contactAction'
+import { connect } from 'react-redux'
+
 
 import './ContactDetailsPage.scss'
 
-export class ContactDetailsPage extends Component {
+class _ContactDetailsPage extends Component {
 
     state = {
-        contact: null
+        contact: null,
+        // tranfermAmount: null
     }
 
     async componentWillMount() {
@@ -16,27 +21,57 @@ export class ContactDetailsPage extends Component {
         this.setState({ contact })
     }
 
-    deleteContact = async () => {
-        await contactService.deleteContact(this.state.contact._id)
+    remove = async () => {
+        this.props.removeContact(this.state.contact._id)
         this.props.history.push('/contact')
 
     }
+
     render() {
         const { contact } = this.state
         return (
             <div className="contactDetailsPage">
                 <h1>details</h1>
-                {contact && <div className="details-container">
+                {contact && <div className="details-container flex justify-center">
+
+                    <Link className="back" to="/contact">🠖</Link>
                     {/* <div className="contact-image flex center"> */}
-                    <img src={`https://robohash.org/${contact._id}`} alt="" />
                     {/* </div> */}
-                    <h2>{contact.name}</h2>
-                    <h4>{contact.email}</h4>
-                    <h4>{contact.phone}</h4>
+                    <div className="contact-info flex column justify-center">
+
+                        <h2>{contact.name}</h2>
+                        <h4>{contact.email}</h4>
+                        <h4>{contact.phone}</h4>
+
+                        <div className="transfer">
+
+                            <TransferFund onChangeFilter={this.onChangeFilter} contactId = {contact._id}/>
+
+                        </div>
+                    </div>
+                    <img src={`https://i.pravatar.cc/150?u=${contact._id}`} alt="" />
                 </div>}
-                {contact && <Link to={`/edit/${contact._id}`}>Edit</Link>}
-                {contact && <button onClick={this.deleteContact}>Delete</button>}
+                <div className="btns-container flex space-between">
+                    {contact && <Link to={`/edit/${contact._id}`} className="edit-btn">Edit</Link>}
+                    {contact && <a onClick={this.remove} className="delete-btn">Delete</a>}
+                </div>
+
             </div>
         )
     }
 }
+
+const mapStateToProps = state => {
+    // console.log('state:', state)
+    // console.log('state.contacatReducer:', state.contacatReducer)
+    return {
+      contacts: state.contactReducer.contacts
+    }
+  }
+  
+  const mapDispatchToProps = {
+    // loadContacts,
+    removeContact
+  }
+  
+  export const ContactDetailsPage = connect(mapStateToProps, mapDispatchToProps)(_ContactDetailsPage)

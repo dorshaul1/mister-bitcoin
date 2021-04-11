@@ -1,15 +1,18 @@
 .contactPreview {
-    background-color: rgb(235, 235, 235);
-    box-shadow: 4px 4px 4px 0px rgba(169, 169, 169, 0.452);
-    margin: 0 10px 20px 10px;
-    border-radius: 80px;
-    width: 300px;
+    background-color: rgba(0, 0, 0, 0.089);
+    // box-shadow: 4px 4px 4px 0px rgba(169, 169, 169, 0.452);
+    // margin: 0 10px 20px 10px;
+    // border-radius: 80px;
+    // width: 300px;
+    color: white;
+    
     height: 80px;
-    padding: 10px;
+    padding: 20px;
     cursor: pointer;
+    border-bottom: 1px solid rgba(61, 61, 61, 0.541);
     
     &:hover{
-        background-color: rgb(224, 224, 224);
+        background-color: rgba(0, 0, 0, 0.185);
 
         box-shadow:none;
         img{
@@ -19,7 +22,7 @@
         
     }
     .contact-image {
-        background-color: white;
+        background-color: rgba(61, 61, 61, 0.541);
         border-radius: 50%;
         // height: 70%;
         margin-right: 40px;

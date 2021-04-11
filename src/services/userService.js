@@ -1,5 +1,7 @@
 export const userService = {
-    getUser
+    getUser,
+    getEmptyUser,
+    updateUserMove
 }
 
 const loggedInUser = {
@@ -10,4 +12,18 @@ const loggedInUser = {
 
 function getUser() {
     return loggedInUser
+}
+
+function getEmptyUser(){
+    return {
+        fullname: '',
+        username: '',
+        password: '',
+    }
+}
+
+function updateUserMove(move) {
+    loggedInUser.moves.push(move)
+    loggedInUser.coins -= move.amount
+    // console.log('loggedInUser.move:', loggedInUser.moves)
 }

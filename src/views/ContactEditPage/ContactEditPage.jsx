@@ -1,11 +1,12 @@
 
 import { Component } from 'react'
 import contactService from '../../services/contactService'
-
+import { saveContact } from '../../store/actions/contactAction'
+import { connect } from 'react-redux'
 
 import './ContactEditPage.scss'
 
-export class ContactEditPage extends Component {
+ class _ContactEditPage extends Component {
 
     state = {
         contact: null,
@@ -28,7 +29,7 @@ export class ContactEditPage extends Component {
     }
     onSaveContact = async (ev) => {
         ev.preventDefault()
-        await contactService.saveContact({ ...this.state.contact })
+        this.props.saveContact({ ...this.state.contact })
         this.props.history.push('/contact')
     }
     render() {
@@ -46,8 +47,22 @@ export class ContactEditPage extends Component {
                 <input required type="text" id="phone" value={phone} onChange={this.handleChange} name="phone" />
 
                 <p>{this.state.errMsg}</p>
-                <button>Save Contact</button>
+                <a onClick={this.onSaveContact}>Save</a>
             </form>
         )
     }
 }
+const mapStateToProps = state => {
+    // console.log('state:', state)
+    // console.log('state.contacatReducer:', state.contacatReducer)
+    return {
+      contacts: state.contactReducer.contacts
+    }
+  }
+  
+  const mapDispatchToProps = {
+    // loadContacts,
+    saveContact
+  }
+  
+  export const ContactEditPage = connect(mapStateToProps, mapDispatchToProps)(_ContactEditPage)
