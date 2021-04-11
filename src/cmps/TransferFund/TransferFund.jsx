@@ -30,7 +30,7 @@ export class TransferFund extends Component {
         const { trasfer } = this.state
 
         return (
-            <form className="transferFund" onSubmit={(ev) => {
+            <form className="transferFund flex column" onSubmit={(ev) => {
                 ev.preventDefault()
                 this.onChangeFilter()
             }

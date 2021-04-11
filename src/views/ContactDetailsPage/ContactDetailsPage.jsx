@@ -32,7 +32,7 @@ class _ContactDetailsPage extends Component {
         return (
             <div className="contactDetailsPage">
                 <h1>details</h1>
-                {contact && <div className="details-container flex justify-center">
+                {contact && <div className="details-container flex align-center space-between">
 
                     <Link className="back" to="/contact">🠖</Link>
                     {/* <div className="contact-image flex center"> */}
