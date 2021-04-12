@@ -6,8 +6,6 @@ export default {
   getEmptyContact
 }
 
-
-
 const contacts = [
   {
     "_id": "5a56640269f443a5d64b32ca",
@@ -179,7 +177,7 @@ function sort(arr) {
 
 function query(filterBy = null) {
   return new Promise((resolve, reject) => {
-    var contactsToReturn = contacts;
+    var contactsToReturn = [...contacts];
     if (filterBy && filterBy.name) {
       contactsToReturn = filter(filterBy.name)
     }
@@ -216,7 +214,6 @@ function _updateContact(contact) {
 }
 
 function _addContact(contact) {
-  console.log('contact:', contact)
   return new Promise((resolve, reject) => {
     contact._id = _makeId()
     contacts.push(contact)
@@ -225,13 +222,11 @@ function _addContact(contact) {
 }
 
 function saveContact(contact) {
-  // console.log('contact:', contact)
   return contact._id ? _updateContact(contact) : _addContact(contact)
 }
 
 function getEmptyContact() {
   return {
-    // _id: _makeId(),
     name: '',
     email: '',
     phone: ''

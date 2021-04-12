@@ -1,68 +1,47 @@
 
-import { Component } from 'react'
+import { useEffect, useState } from 'react'
 import contactService from '../../services/contactService'
 import { saveContact } from '../../store/actions/contactAction'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import './ContactEditPage.scss'
+import { useForm } from '../../hooks/useForm'
 
- class _ContactEditPage extends Component {
+export const ContactEditPage = (props)=> {
 
-    state = {
-        contact: null,
-        errMsg: ''
-    }
-    async componentDidMount() {
-        const { contactId } = this.props.match.params
+    const[contact, setcontact] = useState(null)
+    const[errMsg, setuserMsg] = useState(null)
+    const dispatch = useDispatch()
+    useEffect(async() => {
+        const { contactId } = props.match.params
         try {
             const contact = contactId ? await contactService.getContactById(contactId) : contactService.getEmptyContact()
-            this.setState({ contact })
+            setcontact (contact)
         } catch (err) {
-            this.setState({ errMsg: 'Contact Not Found' })
+            setuserMsg( {errMsg: 'Contact Not Found'} )
         }
-    }
-
-    handleChange = ({ target }) => {
-        const field = target.name
-        const value = target.email === 'number' ? +target.value : target.value
-        this.setState((prevState) => ({ contact: { ...prevState.contact, [field]: value } }))
-    }
-    onSaveContact = async (ev) => {
+    }, [])
+    const [newContact, handleChange] = useForm(contact || contactService.getEmptyContact())
+    const onSaveContact = async (ev) => {
         ev.preventDefault()
-        this.props.saveContact({ ...this.state.contact })
-        this.props.history.push('/contact')
+        dispatch(saveContact(newContact ))
+        props.history.push('/contact')
     }
-    render() {
-        if (!this.state.contact) return <div>{this.state.errMsg || 'Loading'}</div>
-        const { name, email, phone } = this.state.contact
+        if (!newContact) return <div>{errMsg || 'Loading'}</div>
+        const { name, email, phone } = newContact
         return (
-            <form className='contact-edit flex column' onSubmit={this.onSaveContact}>
+             <form className='contact-edit flex column' onSubmit={onSaveContact}>
                 <label htmlFor="name">Name</label>
-                <input  required type="text" id="name" value={name} onChange={this.handleChange} name="name" />
+                <input  required type="text" id="name" value={name} onChange={handleChange} name="name" />
 
                 <label htmlFor="email">Email</label>
-                <input required type="email" id="email" value={email} onChange={this.handleChange} name="email" />
+                <input required type="email" id="email" value={email} onChange={handleChange} name="email" />
 
                 <label htmlFor="phone">Phone</label>
-                <input required type="text" id="phone" value={phone} onChange={this.handleChange} name="phone" />
+                <input required type="text" id="phone" value={phone} onChange={handleChange} name="phone" />
 
-                <p>{this.state.errMsg}</p>
-                <a onClick={this.onSaveContact}>Save</a>
+                <p>{errMsg}</p>
+                <a onClick={onSaveContact}>Save</a>
             </form>
         )
-    }
 }
-const mapStateToProps = state => {
-    // console.log('state:', state)
-    // console.log('state.contacatReducer:', state.contacatReducer)
-    return {
-      contacts: state.contactReducer.contacts
-    }
-  }
-  
-  const mapDispatchToProps = {
-    // loadContacts,
-    saveContact
-  }
-  
-  export const ContactEditPage = connect(mapStateToProps, mapDispatchToProps)(_ContactEditPage)
